@@ -1,0 +1,75 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Predictions for your solar output </title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/scrolling_header.css' %}">
+    </head>
+
+    <body>
+
+      <script>
+    function init() {
+        window.addEventListener('scroll', function(e){
+            var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+                shrinkOn = 10,
+                header = document.querySelector("header");
+            if (distanceY > shrinkOn) {
+                classie.add(header,"smaller");
+            } else {
+                if (classie.has(header,"smaller")) {
+                    classie.remove(header,"smaller");
+                }
+            }
+        });
+    }
+    window.onload = init();
+</script>
+</head>
+
+
+
+<body>
+
+<div id="wrapper">
+
+<header>
+    <div class="container clearfix">
+        <h1 id="logo">
+            Solar Output Calculator
+        </h1>
+        <img src="http://www.icon2s.com/wp-content/uploads/2014/04/black-white-android-sun.png" alt="sun" width="100" height="100">
+        <nav>
+            <a href="http://127.0.0.1:8000/">Calculator</a>
+            <a href="http://127.0.0.1:8000/about/">About</a>
+            <a href="https://github.com/iamlostcoast">github</a>
+        </nav>
+    </div>
+</header><!-- /header -->
+
+<div id="main">
+    <div id="content">
+        <section>
+            <div class="container">
+                <h1>The solar output calculator</h1>
+                <p>This is a tool I built as a project for the Data Science Immersive course at General Assembly.   The prediction algorithm is based on data collected from the National Renewable Energy Laboratory.  This came both from their <a href="https://openpv.nrel.gov/">OpenPV Project</a>, which collects data connected to over one million individual solar installations, and from their <a href="https://nsrdb.nrel.gov/">National Solar Radiation Database (NSRDB)</a> API, which provides irradiance, weather, and windspeed data.  For more on the machine learning algorithms used to build this calculator, check out my github (link below).  Thanks for checking this out!</p>
+                <p>
+                    <a href="https://github.com/iamlostcoast">« Find more about this project on my github</a><br>
+                </p>
+            </div>
+        </section>
+
+<footer>
+<div id="info-bar">
+    <div class="container clearfix">
+        <span class="Calcultor"><a href="http://127.0.0.1:8000/">← back to the calculator</a></span>
+        <span class="github"><a href="https://github.com/iamlostcoast">github</a></span>
+    </div>
+</div><!-- /#top-bar -->
+</footer><!-- /footer -->
+
+
+
+</div><!-- /#wrapper -->

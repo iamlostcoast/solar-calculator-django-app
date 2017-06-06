@@ -1,0 +1,290 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Predictions for your solar output </title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/scrolling_header.css' %}">
+    </head>
+
+    <body>
+
+      <script>
+    function init() {
+        window.addEventListener('scroll', function(e){
+            var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+                shrinkOn = 10,
+                header = document.querySelector("header");
+            if (distanceY > shrinkOn) {
+                classie.add(header,"smaller");
+            } else {
+                if (classie.has(header,"smaller")) {
+                    classie.remove(header,"smaller");
+                }
+            }
+        });
+    }
+    window.onload = init();
+</script>
+</head>
+
+
+
+<body>
+
+<div id="wrapper">
+
+<header>
+    <div class="container clearfix">
+        <h1 id="logo">
+            Solar Output Calculator
+        </h1>
+        <img src="http://www.icon2s.com/wp-content/uploads/2014/04/black-white-android-sun.png" alt="sun" width="100" height="100">
+        <nav>
+            <a href="http://127.0.0.1:8000/about/">About</a>
+            <a href="https://github.com/iamlostcoast">github</a>
+        </nav>
+    </div>
+</header><!-- /header -->
+
+        <h4 style='margin-left: 20px; margin-top: 100px; color: red'> {{ form_message|default:""}} </h4>
+
+        <div class="fluid-container">
+        	<div class="row">
+            <div class='col-md-7'>
+        		 <form class="form-horizontal" method="post" style='margin-left:20px'>
+                    <fieldset>
+                        <!-- Address form -->
+
+                        <h3>Address</h3>
+
+                        <!-- address-line1 input-->
+                        <div class="control-group">
+                            <label class="col-sm-2 control-label">Address Line 1</label>
+                            <div class="col-sm-10">
+                                <input id="address-line1" name="address-line1" type="text" placeholder="Address Line 1"
+                                class="form-control">
+                                <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                            </div>
+                        </div>
+                        <!-- address-line2 input-->
+                        <div class="control-group">
+                            <label class="col-sm-2 control-label">Address Line 2</label>
+                            <div class="col-sm-10">
+                                <input id="address-line2" name="address-line2" type="text" placeholder="Address Line 2"
+                                class="form-control">
+                                <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
+                            </div>
+                        </div>
+                        <!-- city input-->
+                        <div class="control-group">
+                            <label class="col-sm-2 control-label">City / Town</label>
+                            <div class="col-sm-10">
+                                <input id="city" name="city" type="text" placeholder="City" class="form-control">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <!-- region input-->
+                        <!--<div class="control-group">
+                            <label class="col-sm-2 control-label">State</label>
+                            <div class="col-sm-10">
+                                <input id="state" name="state" type="text" placeholder="State"
+                                class="form-control">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>-->
+
+
+
+                        <!-- postal-code input-->
+                        <div class="control-group">
+                            <label class="col-sm-2 control-label">Zipcode</label>
+                            <div class="col-sm-10">
+                                <input id="postal-code" name="zipcode" type="text" placeholder="Zipcode"
+                                class="form-control">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="col-sm-2 control-label">State</label>
+                            <div class="col-sm-10">
+                                <select id="state" name="state" class="input-xlarge">
+                                    <option value="" selected="selected">please select a state</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <fieldset>
+                      <h3>Solar Array Information</h3>
+
+                      <div class="control-group">
+                          <label class="col-sm-2 control-label">Area</label>
+                          <div class="col-sm-10">
+                              <input id="area" name="Area" type="text" placeholder="Area"
+                              class="form-control">
+                              <p class="help-block">Area of solar array in square meters.</p>
+                          </div>
+                      </div>
+                      <!-- postal-code input-->
+                      <div class="control-group">
+                          <label class="col-sm-2 control-label">Tilt</label>
+                          <div class="col-sm-10">
+                              <input id="tilt" name="Tilt" type="text" placeholder="Tilt"
+                              class="form-control">
+                              <p class="help-block">Tilt of your roof/where solar array would be placed in degrees.</p>
+                          </div>
+                      </div>
+
+                      <div class="control-group">
+                          <label class="col-sm-2 control-label">Direction /   Azimuth</label>
+                          <div class="col-sm-10">
+                              <select id="direction" name="Direction" class="input-xlarge">
+                                  <option value="" selected="selected">please select an azimuth angle</option>
+                                  <option>S</option>
+                                  <option>SW</option>
+                                  <option>W</option>
+                                  <option>NW</option>
+                                  <option>N</option>
+                                  <option>NE</option>
+                                  <option>E</option>
+                                  <option>SE</option>
+                              </select>
+                              <p class="help-block">This is the north/south direction the solar array would be facing.</p>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <div class="pull-left">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <p class="help-block">Submission may take a moment.</p>
+
+                          </div>
+                        </div>
+                      </div>
+                   </fieldset>
+
+                   {% csrf_token %}
+                </form>
+        	</div>
+        <div class="col-md-5">
+        <div class="container">
+          <h3 style="text-align: left; color:red"> {{ solar_message|default:"" }} </h3>
+            <div class="row col-md-10 col-md-offset-2 custyle">
+            <table class="table table-striped custab" style="width: 400px; margin-left: -100px">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Value</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+                    <tr>
+                        <td></td>
+                        <td>Installation Cost</td>
+                        <td>{{ formdata.Cost|default:"--" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Annual Return</td>
+                        <td>{{ formdata.annual_savings|default:"--" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Break Even Time</td>
+                        <td>{{ formdata.break_even|default:"--" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Annual Energy Output</td>
+                        <td>{{ formdata.prediction|default:"--" }}</td>
+                    </tr>
+                    <!--<tr>
+                        <td></td>
+                        <td>Temperature</td>
+                        <td>{{ formdata.temperature|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Azimuth</td>
+                        <td>{{ formdata.azimuth|default:"-" }}</td>
+                    </tr>-->
+
+                    <!--<tr>
+                        <td></td>
+                        <td>DNI</td>
+                        <td>{{ formdata.DNI|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Latitude</td>
+                        <td>{{ formdata.lat|default:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Longitude</td>
+                        <td>{{ formdata.lon|default:"-" }}</td>
+                    </tr>-->
+            </table>
+            </div>
+        </div>
+      </div>
+        </form>
+
+    </body>
+</html>
